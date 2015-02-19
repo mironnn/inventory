@@ -1,0 +1,51 @@
+{% extends 'assets_base.html' %}
+
+{% block content %}
+     <h1>Assets</h1>
+
+<a class="btn btn-primary btn-sm" href="/new_asset" role="button">Add new device</a>
+
+    <table class="table table-striped table table-bordered">
+        <tr>
+            <td><p> Id </p></td>
+            <td><p> Device_name </p></td>
+            <td><p> User </p></td>
+            <td><p> Type of device </p></td>
+            <td><p> Serial number </p></td>
+            <td><p> Start date of warranty </p></td>
+            <td><p> Finish date of warranty </p></td>
+        </tr>
+        {% for i in devices_all %}
+        <tr>
+            <td>
+                {{i.id}}
+            </td>
+            <td>
+                {{i.device_name}}
+            </td>
+            <td>
+                {{i.User}}
+            </td>
+            <td>
+                {{i.type}}
+            </td>
+            <td>
+                {{i.serial_number}}
+            </td>
+            <td>
+                {{i.date_start}}
+            </td>
+             <td>
+                {{i.date_finish}}
+            </td>
+
+        </tr>
+        {%endfor%}
+
+    </table>
+
+
+
+{% endblock %}
+
+
