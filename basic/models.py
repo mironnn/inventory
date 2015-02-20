@@ -19,8 +19,8 @@ class device (models.Model):
     User = models.ForeignKey(user)
     type = models.ForeignKey(device_type)
     serial_number = models.CharField(max_length=100)
-    date_start = models.DateTimeField('Start warranty')
-    date_finish = models.DateTimeField('Finish warranty')
+    date_start = models.DateTimeField()
+    date_finish = models.DateTimeField()
     def __unicode__(self):
         return self.device_name
 

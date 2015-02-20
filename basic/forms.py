@@ -9,3 +9,6 @@ class NewDevice (forms.Form):
 
 class DeviceTypes (forms.Form):
     field = forms.CharField(max_length=100)
+
+class EditDevice (forms.Form):
+    field = forms.CharField(max_length=100)

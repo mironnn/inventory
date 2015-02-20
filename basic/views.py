@@ -1,6 +1,6 @@
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render, render_to_response, redirect
 from django.http import HttpResponse
-from .forms import Devices, NewDevice, DeviceTypes
+from .forms import Devices, NewDevice, DeviceTypes, EditDevice
 from basic.models import device_type, device, user
 from django.template.defaulttags import csrf_token
 
@@ -50,17 +50,26 @@ def new_asset (request):
 
 def add_new_asset (request):
     # if 'add_new_asset' in request.GET:
+    # print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    # print (request.GET)
     new_device = device()
+    new_device.User = user()
     new_device.device_name = request.GET['new_asset.device.name']
-    new_device.User = request.GET['new_asset.device.User']
-    new_device.type = request.GET['new_asset.device.type']
+    temp_user = request.GET['new_asset.device.User']
+    temp_user = str(temp_user)
+    # print(temp_user)
+    # print(type(temp_user))
+    new_device.User = user.objects.get(name=temp_user)
+    temp_type = request.GET['new_asset.device.type']
+    temp_type = str(temp_type)
+    new_device.type = device_type.objects.get(type=temp_type)
     new_device.serial_number = request.GET['new_asset.device.serial_number']
-    new_device.date_start = request.GET['new_asset.device.WarrantyStart', False]
-    new_device.date_finish = request.GET['new_asset.device.WarrantyEnd', False]
+    new_device.date_start = request.GET['new_asset.device.WarrantyStart']
+    new_device.date_finish = request.GET['new_asset.device.WarrantyEnd']
     new_device.save()
         # return HttpResponse('ok')
 
-    return render(request, 'assets.html')
+    return (redirect('/assets'))
 
 def dictionaries(request):
     context = {}
@@ -92,5 +101,63 @@ def generate_devices (request):
 def generate_devices (request):
     devices_all=device.objects.all()
     return render_to_response('assets.html', {"devices_all": devices_all})
+
+def contact(request):
+    context = {}
+    template = "contact.html"
+    return render(request, template, context)
+
+def dict_users(request):
+    context = {}
+    template ="dict_users.html"
+    return render(request, template, context)
+
+def dict_device_type(request):
+    context = {}
+    template = "dict_device_type.html"
+    return render(request, template, context)
+
+def edit_asset(request):
+    if 'edit.ID' in request.GET:
+        form = EditDevice
+        device_ID = request.GET['edit.ID']
+        edited_asset = device.objects.get (id = request.GET['edit.ID'])
+        # print(edited_asset.type)
+        User = edited_asset.User
+        type = edited_asset.type
+        date_start = edited_asset.date_start
+        date_finish = edited_asset.date_finish
+        users_all=user.objects.all()
+        device_type_all=device_type.objects.all()
+        context = {"form": form, "edited_asset": edited_asset, "date_start": date_start, "date_finish": date_finish, "User": User, "type": type, "users_all": users_all, "device_type_all": device_type_all, "device_ID": device_ID}
+        template = "edit_asset.html"
+        return render(request, template, context)
+
+    elif 'edit_asset' in request.GET:
+        device_ID = request.GET['edited_asset.ID']
+        print(device_ID)
+        edited_asset = device.objects.get (id = request.GET['edited_asset.ID'])
+        edited_asset.device_name = request.GET['edit_asset.device.name']
+        edited_asset.User = user.objects.get(id=request.GET['edit_asset.device.User'])
+        edited_asset.type = device_type.objects.get(pk=request.GET['edit_asset.device.type'])
+        edited_asset.serial_number = request.GET['edit_asset.device.serial_number']
+        edited_asset.date_start = request.GET['edit_asset.device.WarrantyStart']
+        edited_asset.date_finish = request.GET['edit_asset.device.WarrantyEnd']
+        edited_asset.save()
+
+        return (redirect('/assets'))
+    else:
+        return HttpResponse('ok')
+
+def remove_asset(request):
+
+    device.objects.filter(id = request.GET['remove.ID']).delete()
+
+    return (redirect('/assets'))
+
+def filter_asset (request):
+    context = {}
+    template = "filter_asset.html"
+    return render(request, template, context)
 
 

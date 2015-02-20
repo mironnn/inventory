@@ -1,11 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from basic.views import index, assets, dictionaries, write_to_dict, new_asset, add_new_asset
+from basic.views import index, assets, dictionaries, write_to_dict, new_asset, add_new_asset, contact, dict_users, dict_device_type, edit_asset, remove_asset, filter_asset
 
 from django.conf import settings
-from django.conf.urls.static import static
-from basic import views
-
 urlpatterns = patterns('',
     # Examples:
     #url(r'^$', 'basic.views.index', name='index'),
@@ -21,5 +18,17 @@ urlpatterns = patterns('',
     url(r'^add_new_asset', add_new_asset),
     url(r'^write_to_dictionary', write_to_dict),
     url(r'^dictionaries', dictionaries),
+    url(r'^contact', contact),
+    url(r'^dict_users', dict_users),
+    url(r'^dict_device_type', dict_device_type),
+    url(r'^edit_asset', edit_asset),
+    url(r'^remove_asset', remove_asset),
+    url(r'^filter_asset', filter_asset),
+
+
+
 
 )
+from django.conf.urls.static import static
+from basic import views
+
