@@ -1,0 +1,224 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>IT inventory</title>
+
+   <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+   <link href="{% static 'css/datepicker.css' %}" rel="stylesheet">
+   <link href="{% static 'less/datepicker.less' %}" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/starter-template.css' %}" rel="stylesheet">
+
+
+      <script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+
+                $('#example1').datepicker({
+                    format: "yyyy"
+                });
+
+            });
+            $('.dropdown-toggle').dropdown();
+        </script>
+
+   <style>
+       .asterisk_red {
+        color: red !important;
+       }
+   </style>
+
+
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index">IT Inventory</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="assets">Assets</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Dictionaries <b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/dict_users">Users</a></li>
+                    <li><a href="/dict_device_types">Device types</a></li>
+                </ul>
+            </li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+
+    <div class="container body-content">
+        <div class="container">
+         <br />
+         <br />
+         <br />
+             <div class="panel panel-primary">
+                <div class="panel-heading">
+                <h2 class="panel-title">
+                    Edit Asset
+                </h2>
+             </div>
+
+<!--!!!!!!!!!!MY FORM!!!!!!!!!-->
+
+         <form action="/edit_asset" class="form-horizontal" method="GET" role="form">
+             <!--{% csrf_token %}-->
+             <div class="panel-body">
+               <h4 class="text-primary">Please edit item</h4>
+               <br />
+
+<!--send the device.id to view.py-->
+            <input name="edit_asset" type="hidden" />
+
+            <input name="edited_asset.ID" type="hidden" required value="{{device_ID}}" />
+
+
+<!--Form.Device name-->
+             <div class="form-group">
+                <label class="col-sm-2 control-label"> Device name <span class="mandatory-field-asterisk asterisk_red">*</span></label>
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <input class="form-control ddl-text" name="edit_asset.device.name" type="text" required value="{{edited_asset.device_name}}" />
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+<!--Form.Responsible User -->
+             <div class="form-group">
+                <label class="col-sm-2 control-label">Responsible User <span class="asterisk_red mandatory-field-asterisk">*</span></label>
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <select required class="form-control ddl-text" name="edit_asset.device.User" sele>
+                                <option disabled>Choose responsible user </option>
+                                <option value="None">None </option>
+                                {% for i in users_all %}
+                                <option value="{{i.id}}" {% if i == User %} selected {% endif %} >{{i.name}}</option>
+                                {%endfor%}
+                             </select>
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+<!--Form.Device Type -->
+             <div class="form-group">
+                <label class="col-sm-2 control-label">Device Type <span class="asterisk_red mandatory-field-asterisk">*</span></label>
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <select required class="form-control ddl-text" name="edit_asset.device.type">
+                                <option disabled>Choose type of the device</option>
+                                {% for i in device_type_all %}
+                                <option value="{{i.id}}" {%if i.type == type.type %} selected {% endif %}>{{i.type}}</option>
+                                {%endfor%}
+                             </select>
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+<!--Form.Serial Number -->
+             <div class="form-group">
+                <label class="col-sm-2 control-label"> Serial Number <span class="mandatory-field-asterisk asterisk_red">*</span></label>
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <input required class="form-control ddl-text" name="edit_asset.device.serial_number" type="text" value="{{edited_asset.serial_number}}" />
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+<!--Form.Warranty Start -->
+
+             <div class="form-group">
+                <label class="col-sm-2 control-label"> Warranty Start <span class="mandatory-field-asterisk asterisk_red">*</span></label>
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <input required class="form-control ddl-text" name="edit_asset.device.WarrantyStart" type="date" value="{{edited_asset.date_start}}" />
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+<!--Form.Warranty End -->
+             <div class="form-group">
+                <label class="col-sm-2 control-label"> Warranty End <span class="mandatory-field-asterisk asterisk_red">*</span></label>
+                <div class="col-sm-10">
+                    <div class="ddl">
+                        <div class="input-group">
+                            <input required class="form-control ddl-text" name="edit_asset.device.WarrantyEnd" type="date" value="{{edited_asset.date_finish}}" />
+                            <!--<input required class="form-control ddl-text" name="edit_asset.device.WarrantyEnd" type="date" value="{{edited_asset.date_finish}}" />-->
+                        </div>
+                    </div>
+                </div>
+             </div>
+
+             </div>
+
+ <!--calendar-->
+ <!--<input type="text" class="datepicker" placeholder="Click me!">-->
+
+<!--Form.Footer.buttons-->
+            <div class="panel-footer">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                    <a href="/assets" class="btn btn-default">Cancel</a>
+                </div>
+            </div>
+        </div>
+
+         </form>
+
+
+        </div><!-- /.container -->
+    </div>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="{static 'js/jquery.min.js' %}"></script>
+    <script src="{static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static '/js/less.js-master/dist/less.js' %}"></script>
+
+
+  </body>
+</html>
