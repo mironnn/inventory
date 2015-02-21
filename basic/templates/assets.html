@@ -6,12 +6,14 @@
         <br/>
         <br/>
         <!--<br/>-->
-<div class="table-index table-control-box table-hover">
+<div class=" foo panel-body table-index table-hover">
 
-    <table class="table table-striped table table-bordered table-hover datagrid ">
+    <table style="font-size: 90%" class=" panel-body table table-hover datagrid table-striped table-bordered ">
+
         <tr>
-            <th class="control-box-header" />
-            <!--<th> id </th>-->
+
+
+            <th class=" control-box-header" />
             <th> Device name </th>
             <th> User </th>
             <th> Type of device </th>
@@ -21,57 +23,83 @@
         </tr>
         {% for i in devices_all %}
 
-        <tr>
-            <td class = "hoo">
-               <div style="width: 100%; display: table;">
-               <div style="display: table-row">
+        <tr class=" for_shown">
+
+            <td  class=" for_hidden special-td table-control-box">
                <div style="width: 40px; display: table-cell;">
-               <form action="/edit_asset" method="GET" >
-               <input name="edit.ID" type="hidden" value="{{i.id}}" />
-               <div class="edit-box">
-                   <button title="Edit" class="btn btn-primary btn-sm" type="submit">
-                        <span class=" glyphicon glyphicon-pencil"></span>
-                   </button>
-               </div>
-               </form>
+                   <form action="/edit_asset" method="GET" >
+                   <input name="edit.ID" type="hidden" value="{{i.id}}" />
+                       <div class="edit-box">
+                           <button title="Edit" style="margin:3px;" class="btn btn-primary btn-sm" type="submit">
+                                <span class=" glyphicon glyphicon-pencil"></span>
+                           </button>
+                       </div>
+                   </form>
                </div>
 
                <div style="display: table-cell;">
-               <form action="/remove_asset" method="GET" >
-                   <input name="remove.ID" type="hidden" value="{{i.id}}" />
-                   <div>
-                       <button title="Remove" class="btn btn-primary btn-sm" type="submit">
-                        <span class=" glyphicon glyphicon-remove"></span>
-                   </button>
+                   <form action="/remove_asset" method="GET" >
+                       <input name="remove.ID" type="hidden" value="{{i.id}}" />
+                       <div>
+                           <button title="Remove"  class="btn btn-primary btn-sm" type="submit">
+                            <span class=" glyphicon glyphicon-remove"></span>
+                       </button>
 
-                   </div>
-               </form>
-               </div>
-               </div>
+                        </div>
+                   </form>
                </div>
 
             </td>
-            <!--<td>-->
-                <!--{{i.id}}-->
+            <!--<td class = "table-control-box">-->
+                <!--<div style="display: table-cell;">-->
+
+               <!--<div style="width: 40px; display: table-cell;">-->
+               <!--<form action="/edit_asset" method="GET" >-->
+               <!--<input name="edit.ID" type="hidden" value="{{i.id}}" />-->
+               <!--<div class="edit-box">-->
+                   <!--<button title="Edit" class="btn btn-primary btn-sm" type="submit">-->
+                        <!--<span class=" glyphicon glyphicon-pencil"></span>-->
+                   <!--</button>-->
+               <!--</div>-->
+               <!--</form>-->
+               <!--</div>-->
+
+               <!--<div style="display: table-cell;">-->
+               <!--<form action="/remove_asset" method="GET" >-->
+                   <!--<input name="remove.ID" type="hidden" value="{{i.id}}" />-->
+                   <!--<div>-->
+                       <!--<button title="Remove" class="btn btn-primary btn-sm" type="submit">-->
+                        <!--<span class=" glyphicon glyphicon-remove"></span>-->
+                   <!--</button>-->
+
+                   <!--</div>-->
+               <!--</form>-->
+               <!--</div>-->
+               <!--</div>-->
+                <!--<div style="display: table-cell;" class="panel-body table-control-box">-->
+
+                <!--</div>-->
+
             <!--</td>-->
 
-            <td class="visibl">
+
+            <td class=" td-border foo container body-content">
                 {{i.device_name}}
             </td>
-            <td>
+            <td class="foo container body-content">
                 {{i.User}}
             </td>
-            <td>
+            <td class="foo container body-content">
                 {{i.type}}
             </td>
-            <td>
+            <td class="foo container body-content">
                 {{i.serial_number}}
             </td>
-            <td>
+            <td class="foo container body-content">
                 {{i.date_start | date:"d M Y"}}
             </td>
-             <td>
-                {{i.date_finish | date:"d M Y"}}
+             <td class="foo container body-content">
+                {{i.date_finish | date:" d M Y"}}
             </td>
 
         </tr>

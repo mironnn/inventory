@@ -21,28 +21,54 @@
     <link href="{% static 'css/starter-template.css' %}" rel="stylesheet">
 <style>
 
-    .table-control-box{ margin-left: -120px; }
+    .for_hidden{
 
-    .hidden {
         visibility: hidden;
-        display: block !important;
+    }
+
+    .for_shown:hover .for_hidden{
+
+        visibility: visible;
+    }
+
+    <!--.table-control-box{-->
+        <!--margin-left: ;-->
+        <!--position: ;-->
+        <!--opacity: ;-->
+        <!--display: ;-->
+    <!--}-->
+
+    <!--.table-control-box:hover{-->
+        <!--opacity: ;-->
+        <!--display: ;-->
+    <!--}-->
+
+    <!--.asset-hover{-->
+        <!--position: inherit;-->
+    <!--}-->
+
+    .foo{
+        margin-left: -90px;
+    }
+
+    .special-td{
         background-color: rgb(255,255,255) !important;
         border: none !important;
     }
 
-    .visibl:hover + .hidden {
-        visibility: visible !important;
+    .td-dorder:{
+        border-left-color: rgb(221,221,221) !important;
+        border-right-color: rgb(221,221,221) !important;
+        border-top-color: rgb(221,221,221) !important;
+        border-bottom-color: rgb(221,221,221) !important;
+        border-collapse: collapse;
     }
+
 </style>
 
 
  <script>
-        $('.dropdown-toggle').dropdown();
-        $("#me").hover(function(){
-            $("#else").show();
-         },function(){
-             $("#else").hide();
-         });
+
  </script>
 
 
@@ -79,64 +105,64 @@
 
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <div class="container body-content">
         <div class="container">
-         <br />
-         <br />
-         <br />
-         <!--<div class="table-index table-control-box table-hover">-->
-             <!--<table class="table datagrid table-bordered table-striped">-->
-                 <!--<tr>-->
-                     <!--<th class="control-box-header" />-->
-                     <!--<th>id </th>-->
-                     <!--<th>device name</th>-->
-                     <!--<th>user</th>-->
-                     <!--<th>type of device</th>-->
-                     <!--<th>start date</th>-->
-                     <!--<th>end date</th>-->
-                 <!--</tr>-->
-                 <!--<tr class="row-index">-->
-                       <!--<td class="control-box">-->
-                           <!--<input name="Collection[0].ID" type="hidden" value="" />-->
-                           <!--<div class="edit-box">-->
-                               <!--<a title="edit" href="/assets/edit" class="btn btn-primary btn-sm">-->
-                                   <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                               <!--</a>-->
-                               <!--<button title="remove" class="btn btn-primary btn-sm" type="button" onclick="removeItem('')">-->
-                                    <!--<span class=" glyphicon glyphicon-remove"></span>-->
-                               <!--</button>-->
-                           <!--</div>-->
-                       <!--</td>-->
-                 <!--</tr>-->
+            <br />
+            <br />
+            <br />
+            <!--<div class="table-index table-control-box table-hover">-->
+            <!--<table class="table datagrid table-bordered table-striped">-->
+            <!--<tr>-->
+            <!--<th class="control-box-header" />-->
+            <!--<th>id </th>-->
+            <!--<th>device name</th>-->
+            <!--<th>user</th>-->
+            <!--<th>type of device</th>-->
+            <!--<th>start date</th>-->
+            <!--<th>end date</th>-->
+            <!--</tr>-->
+            <!--<tr class="row-index">-->
+            <!--<td class="control-box">-->
+            <!--<input name="Collection[0].ID" type="hidden" value="" />-->
+            <!--<div class="edit-box">-->
+            <!--<a title="edit" href="/assets/edit" class="btn btn-primary btn-sm">-->
+            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+            <!--</a>-->
+            <!--<button title="remove" class="btn btn-primary btn-sm" type="button" onclick="removeItem('')">-->
+            <!--<span class=" glyphicon glyphicon-remove"></span>-->
+            <!--</button>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--</tr>-->
 
-             <!--</table>-->
-             <div class="panel panel-primary">
+            <!--</table>-->
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h2 class="panel-title">
-                       Assets
+                        Assets
                     </h2>
                 </div>
 
 
                 <div class="panel-body">
 
-                  <div class="row-fluid">
+                    <div class="row-fluid">
 
-                    {% block content %}
-                    {% endblock %}
+                        {% block content %}
+                        {% endblock %}
 
 
-                  </div>
+                    </div>
 
-                 </div><!-- /.container -->
-             </div>
-<!--</div>-->
-</div>
-</div>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                </div><!-- /.container -->
+            </div>
+            <!--</div>-->
+        </div>
+    </div>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
