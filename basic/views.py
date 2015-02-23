@@ -98,9 +98,9 @@ def add_new_asset (request):
 #         my_devices_list = device.objects.all()
 #         return render_to_response(my_devices_list, 'assets.html')
 
-def generate_devices (request):
-    devices_all=device.objects.all()
-    return render_to_response('assets.html', {"devices_all": devices_all})
+# def generate_devices (request):
+#     devices_all=device.objects.all()
+#     return render_to_response('assets.html', {"devices_all": devices_all})
 
 def contact(request):
     context = {}
@@ -197,5 +197,4 @@ def filter_asset (request):
     context = {}
     template = "filter_asset.html"
     return render(request, template, context)
-
 
