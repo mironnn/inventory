@@ -71,10 +71,10 @@ def add_new_asset (request):
 
     return (redirect('/assets'))
 
-def dictionaries(request):
-    context = {}
-    template = "dictionaries.html"
-    return render(request, template, context)
+# def dictionaries(request):
+#     context = {}
+#     template = "dictionaries.html"
+#     return render(request, template, context)
 
 
 # def write_to_db (request):
@@ -85,18 +85,18 @@ def dictionaries(request):
 #         # return HttpResponse('ok')
 #     return render(request, 'assets.html')
 
-def write_to_dict (request):
-    if 'write_to_dictionary' in request.GET:
-        type_of_device = device_type()
-        type_of_device.type = request.GET['write_to_dictionary']
-        type_of_device.save()
-        # return HttpResponse('ok')
-    return render(request, 'dictionaries.html')
+# def write_to_dict (request):
+#     if 'write_to_dictionary' in request.GET:
+#         type_of_device = device_type()
+#         type_of_device.type = request.GET['write_to_dictionary']
+#         type_of_device.save()
+#         # return HttpResponse('ok')
+#     return render(request, 'dictionaries.html')
 
-def generate_devices (request):
-    if 'generate_devices' in request.GET:
-        my_devices_list = device.objects.all()
-        return render_to_response(my_devices_list, 'assets.html')
+# def generate_devices (request):
+#     if 'generate_devices' in request.GET:
+#         my_devices_list = device.objects.all()
+#         return render_to_response(my_devices_list, 'assets.html')
 
 def generate_devices (request):
     devices_all=device.objects.all()
@@ -108,9 +108,47 @@ def contact(request):
     return render(request, template, context)
 
 def dict_users(request):
-    context = {}
-    template ="dict_users.html"
+    users_all=user.objects.all()
+    context = {"users_all": users_all}
+    template = "dict_users.html"
     return render(request, template, context)
+
+def remove_dict_user(request):
+
+    user.objects.filter(id = request.GET['remove.ID']).delete()
+
+    return (redirect('/dict_users'))
+
+def edit_dict_user(request):
+    if 'edit.ID' in request.GET:
+        dict_user_ID = request.GET['edit.ID']
+        edited_user = user.objects.get (id = request.GET['edit.ID'])
+        User = edited_user.name
+        context = {"User": User, "dict_user_ID": dict_user_ID, "edited_user": edited_user}
+        template = "edit_dict_users.html"
+        return render(request, template, context)
+
+    elif 'edit_dict_user' in request.GET:
+        # print('!!!!!!!!!!!!!!!')
+        # print(request.GET['edited_dict_user.ID'])
+        edited_user = user.objects.get (id = request.GET['edited_dict_user.ID'])
+        edited_user.name = request.GET['edit_dict_user.name']
+        edited_user.save()
+
+        return (redirect('/dict_users'))
+    else:
+        return HttpResponse('ok')
+
+def new_dict_user (request):
+    context = {}
+    template = "new_dict_user.html"
+    return render(request, template, context)
+
+def add_new_dict_user (request):
+    new_dict_user = user()
+    new_dict_user.name = request.GET['add_dict_user.name']
+    new_dict_user.save()
+    return (redirect('/dict_users'))
 
 def dict_device_type(request):
     context = {}
