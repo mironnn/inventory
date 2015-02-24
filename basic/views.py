@@ -151,9 +151,43 @@ def add_new_dict_user (request):
     return (redirect('/dict_users'))
 
 def dict_device_type(request):
-    context = {}
+    dict_device_type_all=device_type.objects.all()
+    context = {"dict_device_type_all": dict_device_type_all}
     template = "dict_device_type.html"
     return render(request, template, context)
+
+def remove_dict_device_type(request):
+    device_type.objects.filter(id = request.GET['remove.ID']).delete()
+    return (redirect('/dict_device_type'))
+
+def new_dict_device_type (request):
+    context = {}
+    template = "new_dict_device_type.html"
+    return render(request, template, context)
+
+def add_new_dict_device_type (request):
+    new_dict_device_type = device_type()
+    new_dict_device_type.type = request.GET['add_dict_device_type.type']
+    new_dict_device_type.save()
+    return (redirect('/dict_device_type'))
+
+def edit_dict_device_type (request):
+    if 'edit.ID' in request.GET:
+        dict_device_type_ID = request.GET['edit.ID']
+        edited_device_type = device_type.objects.get (id = request.GET['edit.ID'])
+        Type = edited_device_type.type
+        context = {"Type": Type, "dict_device_type_ID": dict_device_type_ID, "edited_device_type": edited_device_type}
+        template = "edit_dict_device_type.html"
+        return render(request, template, context)
+
+    elif 'edited_dict_device_type' in request.GET:
+        edited_device_type = device_type.objects.get (id = request.GET['edited_dict_device_type.ID'])
+        edited_device_type.type = request.GET['edit_dict_device_type.type']
+        edited_device_type .save()
+
+        return (redirect('/dict_device_type'))
+    else:
+        return HttpResponse('ok')
 
 def edit_asset(request):
     if 'edit.ID' in request.GET:

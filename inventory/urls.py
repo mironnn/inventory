@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from basic.views import index, assets, new_asset, add_new_asset, contact, dict_users, dict_device_type, edit_asset, remove_asset, filter_asset, remove_dict_user, edit_dict_user, new_dict_user, add_new_dict_user
+from basic.views import index, assets, new_asset, add_new_asset, contact, dict_users, dict_device_type, edit_asset, remove_asset, filter_asset, remove_dict_user, edit_dict_user, new_dict_user, add_new_dict_user, remove_dict_device_type, new_dict_device_type, add_new_dict_device_type, edit_dict_device_type
 
 from django.conf import settings
 urlpatterns = patterns('',
@@ -25,6 +25,10 @@ urlpatterns = patterns('',
     url(r'^new_dict_user', new_dict_user),
     url(r'^add_new_dict_user', add_new_dict_user),
     url(r'^dict_device_type', dict_device_type),
+    url(r'^new_dict_device_type', new_dict_device_type),
+    url(r'^add_new_dict_device_type', add_new_dict_device_type),
+    url(r'^remove_dict_device_type', remove_dict_device_type),
+    url(r'^edit_dict_device_type', edit_dict_device_type),
     url(r'^edit_asset', edit_asset),
     url(r'^remove_asset', remove_asset),
     url(r'^filter_asset', filter_asset),
