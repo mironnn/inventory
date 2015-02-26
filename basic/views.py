@@ -231,4 +231,13 @@ def filter_asset (request):
     context = {}
     template = "filter_asset.html"
     return render(request, template, context)
+#
+# def select_filter_1 (request):
+#     select_filter_1 = request.GET['select_filter_1']
+#     input_filter_1 = request.GET['input_filter_1']
+#     if 'device_name' in request.GET['select_filter_1']:
+#         filtered_assets =
 
+# /aj/id
+def json_asset(reguest, id):
+    return HttpResponse("{}")

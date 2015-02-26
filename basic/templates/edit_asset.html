@@ -117,7 +117,7 @@
                 <div class="col-sm-10">
                     <div class="ddl">
                         <div class="input-group">
-                            <select required class="form-control ddl-text" name="edit_asset.device.User" sele>
+                            <select required class="form-control ddl-text" name="edit_asset.device.User">
                                 <option disabled>Choose responsible user </option>
                                 <option value="None">None </option>
                                 {% for i in users_all %}
@@ -165,7 +165,7 @@
                 <div class="col-sm-10">
                     <div class="ddl">
                         <div class="input-group">
-                            <input required class="form-control ddl-text" name="edit_asset.device.WarrantyStart" type="date" value="{{edited_asset.date_start}}" />
+                            <input required class="form-control ddl-text" name="edit_asset.device.WarrantyStart" type="date" value="{{edited_asset.date_start|date:'Y-m-d'}}" />
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                 <div class="col-sm-10">
                     <div class="ddl">
                         <div class="input-group">
-                            <input required class="form-control ddl-text" name="edit_asset.device.WarrantyEnd" type="date" value="{{edited_asset.date_finish}}" />
+                            <input required class="form-control ddl-text" name="edit_asset.device.WarrantyEnd" type="date" value="{{edited_asset.date_finish|date:'Y-m-d'}}" />
                             <!--<input required class="form-control ddl-text" name="edit_asset.device.WarrantyEnd" type="date" value="{{edited_asset.date_finish}}" />-->
                         </div>
                     </div>

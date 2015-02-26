@@ -32,6 +32,7 @@ urlpatterns = patterns('',
     url(r'^edit_asset', edit_asset),
     url(r'^remove_asset', remove_asset),
     url(r'^filter_asset', filter_asset),
+    # url(r'^select_filter_1', select_filter_1),
 
 
 

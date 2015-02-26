@@ -8,9 +8,9 @@
 
 
 <!-- Button trigger modal -->
-<button onclick="location.href='/new_asset'" type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#add_new_device">
-  Add new device
-</button>
+<!--<button onclick="location.href='/new_asset_modal'" type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#add_new_device">-->
+  <!--Add new device-->
+<!--</button>-->
 
 <!-- Modal -->
 <div class="modal fade" id="add_new_device" tabindex="-1" role="dialog" aria-labelledby="modal_add_new_device" aria-hidden="true">
@@ -28,7 +28,7 @@
 
 <!--!!!!!!!!!!MY FORM!!!!!!!!!-->
 
-         <form action="/add_new_asset" class="form-horizontal" method="GET" role="form">
+         <form action="/add_new_asset_modal" class="form-horizontal" method="GET" role="form">
              <!--{% csrf_token %}-->
              <div class="panel-body">
                <h4 class="text-primary">Please fill the form</h4>
@@ -245,10 +245,10 @@
                 {{i.serial_number}}
             </td>
             <td class="my-td td-border foo container body-content">
-                {{i.date_start | date:"d M Y"}}
+                {{i.date_start | date:"m/d/Y"}}
             </td>
              <td class="my-td td-border foo container body-content">
-                {{i.date_finish | date:" d M Y"}}
+                {{i.date_finish | date:"m/d/Y"}}
             </td>
 
         </tr>
